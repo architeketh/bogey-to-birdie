@@ -56,6 +56,10 @@
         .golf-green {
             background: linear-gradient(135deg, #2d5a2d, #3a7a3a);
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -74,10 +78,10 @@
                     </div>
                 </div>
                 <nav class="hidden md:flex gap-6">
-                    <a href="#gear" class="text-gray-700 hover:text-green-700 font-semibold">Gear Reviews</a>
-                    <a href="#training" class="text-gray-700 hover:text-green-700 font-semibold">Training Tips</a>
-                    <a href="#style" class="text-gray-700 hover:text-green-700 font-semibold">Golf Style</a>
-                    <a href="#deals" class="text-gray-700 hover:text-green-700 font-semibold">Best Deals</a>
+                    <a href="#featured" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Gear Reviews</a>
+                    <a href="#latest" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Training Tips</a>
+                    <a href="#gear" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Golf Style</a>
+                    <a href="#deals" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Best Deals</a>
                 </nav>
             </div>
         </div>
@@ -114,17 +118,17 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
+                <!-- Product 1: Garmin GPS Watch -->
                 <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
                     <div class="product-badge">BEST SELLER</div>
                     <div class="aspect-square bg-gray-100 flex items-center justify-center">
                         <div class="text-center p-6">
-                            <div class="text-6xl mb-4">⛳</div>
-                            <p class="text-sm text-gray-500">Product Image</p>
+                            <div class="text-6xl mb-4">⌚</div>
+                            <p class="text-sm text-gray-500">Garmin Approach S62</p>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Garmin Approach S62 GPS Watch</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Garmin Approach S62 GPS Golf Watch</h3>
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
                             <span class="text-sm text-gray-600">(4,283 reviews)</span>
@@ -140,7 +144,7 @@
                             </div>
                             <span class="text-sm font-semibold text-green-700">Save 18%</span>
                         </div>
-                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                        <a href="https://www.amazon.com/dp/B084RNGWQJ?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
                             🛒 Check Price on Amazon
                         </a>
                         <p class="text-xs text-gray-500 mt-2 text-center">
@@ -149,17 +153,17 @@
                     </div>
                 </div>
 
-                <!-- Product 2 -->
+                <!-- Product 2: TaylorMade Irons -->
                 <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
                     <div class="product-badge">EDITOR'S CHOICE</div>
                     <div class="aspect-square bg-gray-100 flex items-center justify-center">
                         <div class="text-center p-6">
                             <div class="text-6xl mb-4">🏌️</div>
-                            <p class="text-sm text-gray-500">Product Image</p>
+                            <p class="text-sm text-gray-500">TaylorMade SIM2 Max</p>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">TaylorMade SIM2 Max Irons</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">TaylorMade SIM2 Max Irons (Steel)</h3>
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
                             <span class="text-sm text-gray-600">(1,847 reviews)</span>
@@ -175,7 +179,7 @@
                             </div>
                             <span class="text-sm font-semibold text-green-700">Save 20%</span>
                         </div>
-                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                        <a href="https://www.amazon.com/dp/B08V1JPMFB?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
                             🛒 Check Price on Amazon
                         </a>
                         <p class="text-xs text-gray-500 mt-2 text-center">
@@ -184,17 +188,17 @@
                     </div>
                 </div>
 
-                <!-- Product 3 -->
+                <!-- Product 3: Orange Whip -->
                 <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
                     <div class="product-badge">HOT DEAL</div>
                     <div class="aspect-square bg-gray-100 flex items-center justify-center">
                         <div class="text-center p-6">
                             <div class="text-6xl mb-4">🎯</div>
-                            <p class="text-sm text-gray-500">Product Image</p>
+                            <p class="text-sm text-gray-500">Orange Whip Trainer</p>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Orange Whip Swing Trainer</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Orange Whip Golf Swing Trainer</h3>
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
                             <span class="text-sm text-gray-600">(5,921 reviews)</span>
@@ -210,7 +214,7 @@
                             </div>
                             <span class="text-sm font-semibold text-green-700">Save 16%</span>
                         </div>
-                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                        <a href="https://www.amazon.com/dp/B001GXP1BO?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
                             🛒 Check Price on Amazon
                         </a>
                         <p class="text-xs text-gray-500 mt-2 text-center">
@@ -259,7 +263,7 @@
                                 <span>Budget-Friendly Options</span>
                             </div>
                         </div>
-                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
                             Read Full Review
                             <span>→</span>
                         </a>
@@ -294,7 +298,7 @@
                                 <span>Complete Outfit Guide</span>
                             </div>
                         </div>
-                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
                             See the Wardrobe
                             <span>→</span>
                         </a>
@@ -329,7 +333,7 @@
                                 <span>Data-Backed Strategy</span>
                             </div>
                         </div>
-                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
                             Read the Blueprint
                             <span>→</span>
                         </a>
@@ -364,7 +368,7 @@
                                 <span>52 Rounds Tested</span>
                             </div>
                         </div>
-                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
                             See the Results
                             <span>→</span>
                         </a>
@@ -383,7 +387,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="#" class="group">
+                <a href="https://www.amazon.com/s?k=golf+clubs+game+improvement&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="group">
                     <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 text-center card-hover border-2 border-green-200">
                         <div class="text-6xl mb-4">🏌️</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Clubs & Irons</h3>
@@ -392,7 +396,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="group">
+                <a href="https://www.amazon.com/s?k=golf+apparel+men&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="group">
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 text-center card-hover border-2 border-blue-200">
                         <div class="text-6xl mb-4">👕</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Golf Apparel</h3>
@@ -401,7 +405,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="group">
+                <a href="https://www.amazon.com/s?k=golf+training+aids&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="group">
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 text-center card-hover border-2 border-purple-200">
                         <div class="text-6xl mb-4">🎯</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Training Aids</h3>
@@ -410,7 +414,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="group">
+                <a href="https://www.amazon.com/s?k=golf+gps+watch&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="group">
                     <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 text-center card-hover border-2 border-orange-200">
                         <div class="text-6xl mb-4">⌚</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Tech & GPS</h3>
@@ -451,7 +455,7 @@
                         <span class="text-2xl font-bold text-green-700">$599</span>
                         <span class="text-lg text-gray-500 line-through">$899</span>
                     </div>
-                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                    <a href="https://www.amazon.com/dp/B09PRVBFQR?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
                         View Deal on Amazon
                     </a>
                 </div>
@@ -476,7 +480,7 @@
                         <span class="text-2xl font-bold text-green-700">$29</span>
                         <span class="text-lg text-gray-500 line-through">$49</span>
                     </div>
-                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                    <a href="https://www.amazon.com/dp/B004QPAQYU?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
                         View Deal on Amazon
                     </a>
                 </div>
@@ -501,7 +505,7 @@
                         <span class="text-2xl font-bold text-green-700">$29</span>
                         <span class="text-lg text-gray-500 line-through">$39</span>
                     </div>
-                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                    <a href="https://www.amazon.com/dp/B08T1JQLJZ?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
                         View Deal on Amazon
                     </a>
                 </div>
@@ -579,19 +583,19 @@
                 <div>
                     <h4 class="font-bold mb-4">Popular Categories</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">Golf Clubs</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Training Aids</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Golf Apparel</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">GPS & Tech</a></li>
+                        <li><a href="https://www.amazon.com/s?k=golf+clubs&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="hover:text-white transition-colors">Golf Clubs</a></li>
+                        <li><a href="https://www.amazon.com/s?k=golf+training+aids&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="hover:text-white transition-colors">Training Aids</a></li>
+                        <li><a href="https://www.amazon.com/s?k=golf+apparel&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="hover:text-white transition-colors">Golf Apparel</a></li>
+                        <li><a href="https://www.amazon.com/s?k=golf+gps&tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="hover:text-white transition-colors">GPS & Tech</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Resources</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">Latest Reviews</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Best Deals</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Beginner's Guide</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#latest" class="hover:text-white transition-colors">Latest Reviews</a></li>
+                        <li><a href="#deals" class="hover:text-white transition-colors">Best Deals</a></li>
+                        <li><a href="#featured" class="hover:text-white transition-colors">Top Picks</a></li>
+                        <li><a href="mailto:contact@bogeytobirdie.golf" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
                 <div>
