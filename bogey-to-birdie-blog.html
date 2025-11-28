@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bogey to Birdie - Golf Tips, Gear & Style for the Aspiring Low Handicapper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a1e 0%, #2d5a2d 50%, #1e3a1e 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .amazon-button {
+            background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+            border: 1px solid #a88734;
+            color: #111;
+            transition: all 0.3s ease;
+        }
+        
+        .amazon-button:hover {
+            background: linear-gradient(to bottom, #f5d78e, #e8b931);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .golf-green {
+            background: linear-gradient(135deg, #2d5a2d, #3a7a3a);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-green-700 rounded-full flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">⛳</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-green-800">Bogey to Birdie</h1>
+                        <p class="text-xs text-gray-600">Your Path to Lower Scores</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex gap-6">
+                    <a href="#gear" class="text-gray-700 hover:text-green-700 font-semibold">Gear Reviews</a>
+                    <a href="#training" class="text-gray-700 hover:text-green-700 font-semibold">Training Tips</a>
+                    <a href="#style" class="text-gray-700 hover:text-green-700 font-semibold">Golf Style</a>
+                    <a href="#deals" class="text-gray-700 hover:text-green-700 font-semibold">Best Deals</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6">Break 90. Look Great. Play Smart.</h2>
+            <p class="text-xl md:text-2xl mb-8 text-green-100 max-w-3xl mx-auto">
+                You're a bogey golfer with big dreams. We'll show you the gear, training aids, and style 
+                that'll have you playing—and looking—like a scratch golfer in no time.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#featured" class="px-8 py-4 bg-white text-green-800 font-bold rounded-lg hover:bg-green-50 transition-all text-lg shadow-lg">
+                    🏆 See Our Top Picks
+                </a>
+                <a href="#latest" class="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-green-800 transition-all text-lg">
+                    📚 Latest Articles
+                </a>
+            </div>
+            <div class="mt-12 text-sm text-green-200">
+                <p>⭐ Over 50,000+ bogey golfers trust our recommendations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">🔥 This Month's Must-Haves</h2>
+                <p class="text-xl text-gray-600">The gear that's actually making a difference for bogey golfers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
+                    <div class="product-badge">BEST SELLER</div>
+                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-6xl mb-4">⛳</div>
+                            <p class="text-sm text-gray-500">Product Image</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Garmin Approach S62 GPS Watch</h3>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+                            <span class="text-sm text-gray-600">(4,283 reviews)</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
+                            Course management is where bogey golfers lose the most strokes. This GPS watch gives you 
+                            exact yardages, hazard locations, and smart caddie advice. I dropped 4 strokes in my first month.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-green-700">$449</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">$549</span>
+                            </div>
+                            <span class="text-sm font-semibold text-green-700">Save 18%</span>
+                        </div>
+                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                            🛒 Check Price on Amazon
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            As an Amazon Associate, we earn from qualifying purchases
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
+                    <div class="product-badge">EDITOR'S CHOICE</div>
+                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-6xl mb-4">🏌️</div>
+                            <p class="text-sm text-gray-500">Product Image</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">TaylorMade SIM2 Max Irons</h3>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+                            <span class="text-sm text-gray-600">(1,847 reviews)</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
+                            Game-improvement irons that actually look like player's clubs. Massive sweet spot forgives 
+                            those off-center hits while maintaining workability. Your buddies will think you got lessons.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-green-700">$799</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">$999</span>
+                            </div>
+                            <span class="text-sm font-semibold text-green-700">Save 20%</span>
+                        </div>
+                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                            🛒 Check Price on Amazon
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            As an Amazon Associate, we earn from qualifying purchases
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
+                    <div class="product-badge">HOT DEAL</div>
+                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-6xl mb-4">🎯</div>
+                            <p class="text-sm text-gray-500">Product Image</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Orange Whip Swing Trainer</h3>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+                            <span class="text-sm text-gray-600">(5,921 reviews)</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
+                            The #1 training aid for developing tempo and sequence. Use it for 5 minutes before your 
+                            round and watch your swing smooth out. Tour pros swear by this thing.
+                        </p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-green-700">$109</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">$129</span>
+                            </div>
+                            <span class="text-sm font-semibold text-green-700">Save 16%</span>
+                        </div>
+                        <a href="#" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                            🛒 Check Price on Amazon
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            As an Amazon Associate, we earn from qualifying purchases
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles -->
+    <section id="latest" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">📚 Latest from the Blog</h2>
+                <p class="text-xl text-gray-600">Real advice for real golfers breaking through to the 80s</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Article 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="aspect-video golf-green flex items-center justify-center">
+                        <span class="text-white text-6xl">🏌️‍♂️</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">GEAR REVIEW</span>
+                            <span class="text-sm text-gray-500">December 15, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                            7 Training Aids That Actually Work (And 3 That Are Complete BS)
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            I've tested over 40 training aids in the past year. Most are gimmicks that collect dust 
+                            in your garage. But these 7? They're game-changers. Here's what actually moved the needle 
+                            for my swing speed, consistency, and short game...
+                        </p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>⏱️</span>
+                                <span>8 min read</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>💰</span>
+                                <span>Budget-Friendly Options</span>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                            Read Full Review
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="aspect-video golf-green flex items-center justify-center">
+                        <span class="text-white text-6xl">👕</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">STYLE GUIDE</span>
+                            <span class="text-sm text-gray-500">December 12, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                            Look Like a Pro Without Spending Like One: $300 Golf Wardrobe
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            You don't need head-to-toe Titleist to look sharp on the course. I've put together a complete 
+                            4-outfit rotation using Amazon finds that look like they came from the pro shop. Performance 
+                            fabrics, classic fits, and none of that embarrassing logo overload...
+                        </p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>⏱️</span>
+                                <span>6 min read</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>🏆</span>
+                                <span>Complete Outfit Guide</span>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                            See the Wardrobe
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="aspect-video golf-green flex items-center justify-center">
+                        <span class="text-white text-6xl">📊</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">STRATEGY</span>
+                            <span class="text-sm text-gray-500">December 10, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                            The "80s Blueprint": Course Management for Breaking Through
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Want to know the dirty secret? You don't need to hit it 300 yards to break 80. You need 
+                            smart course management. I analyzed 50 rounds of data from golfers who made the jump from 
+                            90s to consistent 80s. Here's the game plan they all followed...
+                        </p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>⏱️</span>
+                                <span>12 min read</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>📈</span>
+                                <span>Data-Backed Strategy</span>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                            Read the Blueprint
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="aspect-video golf-green flex items-center justify-center">
+                        <span class="text-white text-6xl">🎯</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">EQUIPMENT</span>
+                            <span class="text-sm text-gray-500">December 8, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                            Rangefinder vs GPS Watch: Which One Actually Shaved Strokes?
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            I tested both for an entire season—alternating rounds with a premium rangefinder and a GPS 
+                            watch. The results surprised me. Here's which tech actually helped my game (and which was 
+                            just a fancy distraction on my wrist)...
+                        </p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>⏱️</span>
+                                <span>10 min read</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span>🔬</span>
+                                <span>52 Rounds Tested</span>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                            See the Results
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Showcase -->
+    <section id="gear" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">🎯 Shop by Category</h2>
+                <p class="text-xl text-gray-600">Everything you need to level up your game</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="#" class="group">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 text-center card-hover border-2 border-green-200">
+                        <div class="text-6xl mb-4">🏌️</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Clubs & Irons</h3>
+                        <p class="text-gray-600 text-sm mb-4">Game-improvement sets that look tour-ready</p>
+                        <span class="text-green-700 font-semibold group-hover:underline">Shop Clubs →</span>
+                    </div>
+                </a>
+
+                <a href="#" class="group">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 text-center card-hover border-2 border-blue-200">
+                        <div class="text-6xl mb-4">👕</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Golf Apparel</h3>
+                        <p class="text-gray-600 text-sm mb-4">Performance wear that doesn't break the bank</p>
+                        <span class="text-blue-700 font-semibold group-hover:underline">Shop Apparel →</span>
+                    </div>
+                </a>
+
+                <a href="#" class="group">
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 text-center card-hover border-2 border-purple-200">
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Training Aids</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tools that actually improve your swing</p>
+                        <span class="text-purple-700 font-semibold group-hover:underline">Shop Training →</span>
+                    </div>
+                </a>
+
+                <a href="#" class="group">
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 text-center card-hover border-2 border-orange-200">
+                        <div class="text-6xl mb-4">⌚</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Tech & GPS</h3>
+                        <p class="text-gray-600 text-sm mb-4">Smart devices for smarter course management</p>
+                        <span class="text-orange-700 font-semibold group-hover:underline">Shop Tech →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Deals Section -->
+    <section id="deals" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">💰 Today's Best Deals</h2>
+                <p class="text-xl text-gray-600">Limited-time offers on top-rated gear</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Deal 1 -->
+                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-red-200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded">LIMITED TIME</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-red-600">35% OFF</p>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Callaway Edge Golf Set (Complete)</h3>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
+                        <span class="text-xs text-gray-600">(3,241)</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4">Complete set with driver, fairways, hybrids, irons, wedges, putter, and bag</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl font-bold text-green-700">$599</span>
+                        <span class="text-lg text-gray-500 line-through">$899</span>
+                    </div>
+                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                        View Deal on Amazon
+                    </a>
+                </div>
+
+                <!-- Deal 2 -->
+                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-orange-200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded">FLASH SALE</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-orange-600">40% OFF</p>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">SKLZ Golf Tempo & Grip Trainer</h3>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
+                        <span class="text-xs text-gray-600">(2,891)</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4">Develop perfect tempo and eliminate your slice in just 10 minutes a day</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl font-bold text-green-700">$29</span>
+                        <span class="text-lg text-gray-500 line-through">$49</span>
+                    </div>
+                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                        View Deal on Amazon
+                    </a>
+                </div>
+
+                <!-- Deal 3 -->
+                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-green-200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded">BEST SELLER</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-green-600">25% OFF</p>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Bridgestone e12 Contact Golf Balls</h3>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
+                        <span class="text-xs text-gray-600">(7,124)</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4">Tour-level distance with incredible greenside spin (dozen)</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl font-bold text-green-700">$29</span>
+                        <span class="text-lg text-gray-500 line-through">$39</span>
+                    </div>
+                    <a href="#" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
+                        View Deal on Amazon
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-16 bg-gradient-to-r from-green-700 to-green-900 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Join 15,000+ Golfers Getting Better</h2>
+            <p class="text-xl mb-8 text-green-100">
+                Weekly gear reviews, course management tips, and exclusive Amazon deals delivered to your inbox
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
+                <input 
+                    type="email" 
+                    placeholder="Enter your email address" 
+                    class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg outline-none"
+                />
+                <button class="px-8 py-4 bg-white text-green-800 font-bold rounded-lg hover:bg-green-50 transition-all text-lg whitespace-nowrap">
+                    Subscribe Free
+                </button>
+            </div>
+            <p class="text-sm text-green-200 mt-4">No spam. Unsubscribe anytime. We respect your inbox.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-green-50 rounded-2xl p-8 md:p-12 border-2 border-green-200">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-20 h-20 bg-green-700 rounded-full flex items-center justify-center text-4xl">
+                        ⛳
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900">About Bogey to Birdie</h2>
+                        <p class="text-green-700 font-semibold">Your trusted golf improvement resource</p>
+                    </div>
+                </div>
+                <div class="space-y-4 text-gray-700 leading-relaxed">
+                    <p class="text-lg">
+                        Hey, I'm Mike—a former 18-handicapper who got tired of embarrassing myself on the course 
+                        and decided to figure out what actually works.
+                    </p>
+                    <p>
+                        After spending thousands on equipment, training aids, and lessons, I learned what separates 
+                        the marketing hype from real game-changers. Now I'm sharing that knowledge with golfers like 
+                        you who want to break through to consistent 80s without breaking the bank.
+                    </p>
+                    <p>
+                        <strong>My promise:</strong> Every product I recommend, I've personally tested. Every tip 
+                        I share comes from real rounds, not theory. And every affiliate link helps support this site 
+                        so I can keep testing and reviewing gear for you.
+                    </p>
+                    <p class="font-semibold text-green-800">
+                        Let's get you playing better golf. 🏌️‍♂️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Bogey to Birdie</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Honest gear reviews and real advice for bogey golfers who want to level up their game.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Popular Categories</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Golf Clubs</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Training Aids</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Golf Apparel</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">GPS & Tech</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Latest Reviews</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Best Deals</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Beginner's Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Follow Us</h4>
+                    <div class="flex gap-4 mb-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            📘
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            📷
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            🐦
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">Join our community of 50,000+ golfers</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="text-center text-gray-500 text-sm">
+                    <p class="mb-2">
+                        <strong>Affiliate Disclosure:</strong> Bogey to Birdie is a participant in the Amazon Services LLC 
+                        Associates Program, an affiliate advertising program designed to provide a means for sites to earn 
+                        advertising fees by advertising and linking to Amazon.com. We earn from qualifying purchases.
+                    </p>
+                    <p>&copy; 2024 Bogey to Birdie. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
