@@ -60,10 +60,223 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     
+    <!-- Admin Login Button (Top Right) -->
+    <div id="adminLoginBtn" class="fixed top-4 right-4 z-50" style="display: none;">
+        <button onclick="signIn()" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all shadow-lg">
+            🔐 Admin Login
+        </button>
+    </div>
+
+    <!-- Admin Panel (Bottom Right - Only visible when logged in) -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <div class="bg-white rounded-lg shadow-2xl p-4 border-2 border-green-700">
+            <div class="flex items-center gap-3 mb-4 pb-4 border-b">
+                <div class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold">👤</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm" id="adminEmail">Admin</p>
+                    <p class="text-xs text-gray-500">Logged in</p>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <button onclick="openModal('addArticle')" class="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all text-sm font-semibold">
+                    ✍️ Add Article
+                </button>
+                <button onclick="openModal('addProduct')" class="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-all text-sm font-semibold">
+                    🏌️ Add Top Pick
+                </button>
+                <button onclick="openModal('manageContent')" class="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-all text-sm font-semibold">
+                    📋 Manage Content
+                </button>
+                <button onclick="signOut()" class="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-all text-sm font-semibold">
+                    🚪 Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Article Modal -->
+    <div id="addArticleModal" class="modal">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">✍️ Add New Article</h2>
+                    <button onclick="closeModal('addArticle')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                <form id="articleForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Article Title</label>
+                        <input type="text" id="articleTitle" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Category</label>
+                        <select id="articleCategory" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                            <option value="GEAR REVIEW">Gear Review</option>
+                            <option value="STYLE GUIDE">Style Guide</option>
+                            <option value="STRATEGY">Strategy</option>
+                            <option value="EQUIPMENT">Equipment</option>
+                            <option value="TRAINING">Training</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Excerpt (Short Description)</label>
+                        <textarea id="articleExcerpt" rows="3" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Read Time (minutes)</label>
+                        <input type="number" id="articleReadTime" value="8" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Icon Emoji</label>
+                        <input type="text" id="articleIcon" value="🏌️‍♂️" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Tag/Badge (optional)</label>
+                        <input type="text" id="articleTag" placeholder="e.g., Budget-Friendly Options" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Article URL/Link (optional)</label>
+                        <input type="url" id="articleUrl" placeholder="https://..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all font-bold">
+                        📝 Publish Article
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">🏌️ Add Featured Product</h2>
+                    <button onclick="closeModal('addProduct')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                <form id="productForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Product Name</label>
+                        <input type="text" id="productName" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Badge (e.g., BEST SELLER, HOT DEAL)</label>
+                        <input type="text" id="productBadge" value="FEATURED" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Icon Emoji</label>
+                        <input type="text" id="productIcon" value="⌚" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Icon Label (e.g., Garmin Approach S62)</label>
+                        <input type="text" id="productIconLabel" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Description</label>
+                        <textarea id="productDescription" rows="3" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Current Price ($)</label>
+                            <input type="number" id="productPrice" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Original Price ($)</label>
+                            <input type="number" id="productOriginalPrice" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Amazon Link (with your affiliate tag)</label>
+                        <input type="url" id="productAmazonLink" required placeholder="https://www.amazon.com/dp/..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Rating (1-5)</label>
+                        <input type="number" id="productRating" value="5" min="1" max="5" step="0.1" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Review Count</label>
+                        <input type="number" id="productReviews" value="1000" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all font-bold">
+                        ✅ Add to Featured Products
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Content Modal -->
+    <div id="manageContentModal" class="modal">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">📋 Manage Content</h2>
+                    <button onclick="closeModal('manageContent')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="flex gap-2 mb-6 border-b">
+                    <button onclick="showManageTab('articles')" id="manageArticlesTab" class="px-4 py-2 font-semibold border-b-2 border-green-700 text-green-700">
+                        Articles
+                    </button>
+                    <button onclick="showManageTab('products')" id="manageProductsTab" class="px-4 py-2 font-semibold text-gray-500 hover:text-gray-700">
+                        Featured Products
+                    </button>
+                </div>
+
+                <!-- Articles List -->
+                <div id="manageArticlesList" class="space-y-3">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- Products List -->
+                <div id="manageProductsList" class="space-y-3" style="display: none;">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4">
@@ -117,111 +330,8 @@
                 <p class="text-xl text-gray-600">The gear that's actually making a difference for bogey golfers</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1: Garmin GPS Watch -->
-                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
-                    <div class="product-badge">BEST SELLER</div>
-                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
-                        <div class="text-center p-6">
-                            <div class="text-6xl mb-4">⌚</div>
-                            <p class="text-sm text-gray-500">Garmin Approach S62</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Garmin Approach S62 GPS Golf Watch</h3>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
-                            <span class="text-sm text-gray-600">(4,283 reviews)</span>
-                        </div>
-                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
-                            Course management is where bogey golfers lose the most strokes. This GPS watch gives you 
-                            exact yardages, hazard locations, and smart caddie advice. I dropped 4 strokes in my first month.
-                        </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <span class="text-2xl font-bold text-green-700">$449</span>
-                                <span class="text-sm text-gray-500 line-through ml-2">$549</span>
-                            </div>
-                            <span class="text-sm font-semibold text-green-700">Save 18%</span>
-                        </div>
-                        <a href="https://www.amazon.com/dp/B084RNGWQJ?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
-                            🛒 Check Price on Amazon
-                        </a>
-                        <p class="text-xs text-gray-500 mt-2 text-center">
-                            As an Amazon Associate, we earn from qualifying purchases
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Product 2: TaylorMade Irons -->
-                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
-                    <div class="product-badge">EDITOR'S CHOICE</div>
-                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
-                        <div class="text-center p-6">
-                            <div class="text-6xl mb-4">🏌️</div>
-                            <p class="text-sm text-gray-500">TaylorMade SIM2 Max</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">TaylorMade SIM2 Max Irons (Steel)</h3>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
-                            <span class="text-sm text-gray-600">(1,847 reviews)</span>
-                        </div>
-                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
-                            Game-improvement irons that actually look like player's clubs. Massive sweet spot forgives 
-                            those off-center hits while maintaining workability. Your buddies will think you got lessons.
-                        </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <span class="text-2xl font-bold text-green-700">$799</span>
-                                <span class="text-sm text-gray-500 line-through ml-2">$999</span>
-                            </div>
-                            <span class="text-sm font-semibold text-green-700">Save 20%</span>
-                        </div>
-                        <a href="https://www.amazon.com/dp/B08V1JPMFB?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
-                            🛒 Check Price on Amazon
-                        </a>
-                        <p class="text-xs text-gray-500 mt-2 text-center">
-                            As an Amazon Associate, we earn from qualifying purchases
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Product 3: Orange Whip -->
-                <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
-                    <div class="product-badge">HOT DEAL</div>
-                    <div class="aspect-square bg-gray-100 flex items-center justify-center">
-                        <div class="text-center p-6">
-                            <div class="text-6xl mb-4">🎯</div>
-                            <p class="text-sm text-gray-500">Orange Whip Trainer</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Orange Whip Golf Swing Trainer</h3>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
-                            <span class="text-sm text-gray-600">(5,921 reviews)</span>
-                        </div>
-                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
-                            The #1 training aid for developing tempo and sequence. Use it for 5 minutes before your 
-                            round and watch your swing smooth out. Tour pros swear by this thing.
-                        </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <span class="text-2xl font-bold text-green-700">$109</span>
-                                <span class="text-sm text-gray-500 line-through ml-2">$129</span>
-                            </div>
-                            <span class="text-sm font-semibold text-green-700">Save 16%</span>
-                        </div>
-                        <a href="https://www.amazon.com/dp/B001GXP1BO?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
-                            🛒 Check Price on Amazon
-                        </a>
-                        <p class="text-xs text-gray-500 mt-2 text-center">
-                            As an Amazon Associate, we earn from qualifying purchases
-                        </p>
-                    </div>
-                </div>
+            <div id="featuredProductsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated from Firestore -->
             </div>
         </div>
     </section>
@@ -234,146 +344,8 @@
                 <p class="text-xl text-gray-600">Real advice for real golfers breaking through to the 80s</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Article 1 -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
-                    <div class="aspect-video golf-green flex items-center justify-center">
-                        <span class="text-white text-6xl">🏌️‍♂️</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">GEAR REVIEW</span>
-                            <span class="text-sm text-gray-500">December 15, 2024</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
-                            7 Training Aids That Actually Work (And 3 That Are Complete BS)
-                        </h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            I've tested over 40 training aids in the past year. Most are gimmicks that collect dust 
-                            in your garage. But these 7? They're game-changers. Here's what actually moved the needle 
-                            for my swing speed, consistency, and short game...
-                        </p>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>⏱️</span>
-                                <span>8 min read</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>💰</span>
-                                <span>Budget-Friendly Options</span>
-                            </div>
-                        </div>
-                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
-                            Read Full Review
-                            <span>→</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Article 2 -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
-                    <div class="aspect-video golf-green flex items-center justify-center">
-                        <span class="text-white text-6xl">👕</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">STYLE GUIDE</span>
-                            <span class="text-sm text-gray-500">December 12, 2024</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
-                            Look Like a Pro Without Spending Like One: $300 Golf Wardrobe
-                        </h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            You don't need head-to-toe Titleist to look sharp on the course. I've put together a complete 
-                            4-outfit rotation using Amazon finds that look like they came from the pro shop. Performance 
-                            fabrics, classic fits, and none of that embarrassing logo overload...
-                        </p>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>⏱️</span>
-                                <span>6 min read</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>🏆</span>
-                                <span>Complete Outfit Guide</span>
-                            </div>
-                        </div>
-                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
-                            See the Wardrobe
-                            <span>→</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Article 3 -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
-                    <div class="aspect-video golf-green flex items-center justify-center">
-                        <span class="text-white text-6xl">📊</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">STRATEGY</span>
-                            <span class="text-sm text-gray-500">December 10, 2024</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
-                            The "80s Blueprint": Course Management for Breaking Through
-                        </h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            Want to know the dirty secret? You don't need to hit it 300 yards to break 80. You need 
-                            smart course management. I analyzed 50 rounds of data from golfers who made the jump from 
-                            90s to consistent 80s. Here's the game plan they all followed...
-                        </p>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>⏱️</span>
-                                <span>12 min read</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>📈</span>
-                                <span>Data-Backed Strategy</span>
-                            </div>
-                        </div>
-                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
-                            Read the Blueprint
-                            <span>→</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Article 4 -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
-                    <div class="aspect-video golf-green flex items-center justify-center">
-                        <span class="text-white text-6xl">🎯</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">EQUIPMENT</span>
-                            <span class="text-sm text-gray-500">December 8, 2024</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
-                            Rangefinder vs GPS Watch: Which One Actually Shaved Strokes?
-                        </h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            I tested both for an entire season—alternating rounds with a premium rangefinder and a GPS 
-                            watch. The results surprised me. Here's which tech actually helped my game (and which was 
-                            just a fancy distraction on my wrist)...
-                        </p>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>⏱️</span>
-                                <span>10 min read</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <span>🔬</span>
-                                <span>52 Rounds Tested</span>
-                            </div>
-                        </div>
-                        <a href="#latest" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
-                            See the Results
-                            <span>→</span>
-                        </a>
-                    </div>
-                </article>
+            <div id="latestArticlesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Dynamically populated from Firestore -->
             </div>
         </div>
     </section>
@@ -422,93 +394,6 @@
                         <span class="text-orange-700 font-semibold group-hover:underline">Shop Tech →</span>
                     </div>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Best Deals Section -->
-    <section id="deals" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">💰 Today's Best Deals</h2>
-                <p class="text-xl text-gray-600">Limited-time offers on top-rated gear</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Deal 1 -->
-                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-red-200">
-                    <div class="flex items-start justify-between mb-4">
-                        <div>
-                            <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded">LIMITED TIME</span>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-3xl font-bold text-red-600">35% OFF</p>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Callaway Edge Golf Set (Complete)</h3>
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
-                        <span class="text-xs text-gray-600">(3,241)</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-4">Complete set with driver, fairways, hybrids, irons, wedges, putter, and bag</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl font-bold text-green-700">$599</span>
-                        <span class="text-lg text-gray-500 line-through">$899</span>
-                    </div>
-                    <a href="https://www.amazon.com/dp/B09PRVBFQR?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
-                        View Deal on Amazon
-                    </a>
-                </div>
-
-                <!-- Deal 2 -->
-                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-orange-200">
-                    <div class="flex items-start justify-between mb-4">
-                        <div>
-                            <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded">FLASH SALE</span>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-3xl font-bold text-orange-600">40% OFF</p>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">SKLZ Golf Tempo & Grip Trainer</h3>
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
-                        <span class="text-xs text-gray-600">(2,891)</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-4">Develop perfect tempo and eliminate your slice in just 10 minutes a day</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl font-bold text-green-700">$29</span>
-                        <span class="text-lg text-gray-500 line-through">$49</span>
-                    </div>
-                    <a href="https://www.amazon.com/dp/B004QPAQYU?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
-                        View Deal on Amazon
-                    </a>
-                </div>
-
-                <!-- Deal 3 -->
-                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-green-200">
-                    <div class="flex items-start justify-between mb-4">
-                        <div>
-                            <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded">BEST SELLER</span>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-3xl font-bold text-green-600">25% OFF</p>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Bridgestone e12 Contact Golf Balls</h3>
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-yellow-500 text-sm">⭐⭐⭐⭐⭐</span>
-                        <span class="text-xs text-gray-600">(7,124)</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-4">Tour-level distance with incredible greenside spin (dozen)</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl font-bold text-green-700">$29</span>
-                        <span class="text-lg text-gray-500 line-through">$39</span>
-                    </div>
-                    <a href="https://www.amazon.com/dp/B08T1JQLJZ?tag=YOUR-TAG-20" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-2 px-4 rounded text-center font-bold block text-sm">
-                        View Deal on Amazon
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -627,5 +512,384 @@
         </div>
     </footer>
 
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // Firebase configuration - REPLACE WITH YOUR CONFIG
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        const ADMIN_EMAIL = "architek.eth@gmail.com";
+
+        // Global functions
+        window.signIn = async function() {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                if (result.user.email === ADMIN_EMAIL) {
+                    console.log('Admin logged in successfully');
+                } else {
+                    await firebaseSignOut(auth);
+                    alert('Unauthorized. Only admin can access.');
+                }
+            } catch (error) {
+                console.error('Error signing in:', error);
+                alert('Error signing in: ' + error.message);
+            }
+        };
+
+        window.signOut = async function() {
+            try {
+                await firebaseSignOut(auth);
+                console.log('Signed out successfully');
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+        };
+
+        window.openModal = function(modalName) {
+            const modalMap = {
+                'addArticle': 'addArticleModal',
+                'addProduct': 'addProductModal',
+                'manageContent': 'manageContentModal'
+            };
+            document.getElementById(modalMap[modalName]).classList.add('active');
+            if (modalName === 'manageContent') {
+                loadManageContent();
+            }
+        };
+
+        window.closeModal = function(modalName) {
+            const modalMap = {
+                'addArticle': 'addArticleModal',
+                'addProduct': 'addProductModal',
+                'manageContent': 'manageContentModal'
+            };
+            document.getElementById(modalMap[modalName]).classList.remove('active');
+        };
+
+        window.showManageTab = function(tab) {
+            if (tab === 'articles') {
+                document.getElementById('manageArticlesList').style.display = 'block';
+                document.getElementById('manageProductsList').style.display = 'none';
+                document.getElementById('manageArticlesTab').className = 'px-4 py-2 font-semibold border-b-2 border-green-700 text-green-700';
+                document.getElementById('manageProductsTab').className = 'px-4 py-2 font-semibold text-gray-500 hover:text-gray-700';
+            } else {
+                document.getElementById('manageArticlesList').style.display = 'none';
+                document.getElementById('manageProductsList').style.display = 'block';
+                document.getElementById('manageArticlesTab').className = 'px-4 py-2 font-semibold text-gray-500 hover:text-gray-700';
+                document.getElementById('manageProductsTab').className = 'px-4 py-2 font-semibold border-b-2 border-green-700 text-green-700';
+            }
+        };
+
+        // Auth state observer
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email === ADMIN_EMAIL) {
+                document.getElementById('adminPanel').style.display = 'block';
+                document.getElementById('adminLoginBtn').style.display = 'none';
+                document.getElementById('adminEmail').textContent = user.email;
+            } else {
+                document.getElementById('adminPanel').style.display = 'none';
+                document.getElementById('adminLoginBtn').style.display = 'block';
+            }
+        });
+
+        // Load featured products
+        async function loadFeaturedProducts() {
+            const grid = document.getElementById('featuredProductsGrid');
+            grid.innerHTML = '<div class="col-span-full text-center py-12"><div class="animate-spin w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full mx-auto"></div><p class="mt-4 text-gray-600">Loading products...</p></div>';
+            
+            try {
+                const q = query(collection(db, 'featuredProducts'), orderBy('createdAt', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">No featured products yet. Add your first one!</div>';
+                    return;
+                }
+
+                grid.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+                    const stars = '⭐'.repeat(Math.floor(product.rating));
+                    
+                    grid.innerHTML += `
+                        <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
+                            <div class="product-badge">${product.badge}</div>
+                            <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                                <div class="text-center p-6">
+                                    <div class="text-6xl mb-4">${product.icon}</div>
+                                    ${product.iconLabel ? `<p class="text-sm text-gray-500">${product.iconLabel}</p>` : ''}
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-yellow-500">${stars}</span>
+                                    <span class="text-sm text-gray-600">(${product.reviews.toLocaleString()} reviews)</span>
+                                </div>
+                                <p class="text-gray-700 mb-4 text-sm leading-relaxed">${product.description}</p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-2xl font-bold text-green-700">$${product.price}</span>
+                                        ${product.originalPrice ? `<span class="text-sm text-gray-500 line-through ml-2">$${product.originalPrice}</span>` : ''}
+                                    </div>
+                                    ${discount > 0 ? `<span class="text-sm font-semibold text-green-700">Save ${discount}%</span>` : ''}
+                                </div>
+                                <a href="${product.amazonLink}" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                                    🛒 Check Price on Amazon
+                                </a>
+                                <p class="text-xs text-gray-500 mt-2 text-center">
+                                    As an Amazon Associate, we earn from qualifying purchases
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error loading products:', error);
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-red-600">Error loading products. Please refresh.</div>';
+            }
+        }
+
+        // Load articles
+        async function loadArticles() {
+            const grid = document.getElementById('latestArticlesGrid');
+            grid.innerHTML = '<div class="col-span-full text-center py-12"><div class="animate-spin w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full mx-auto"></div><p class="mt-4 text-gray-600">Loading articles...</p></div>';
+            
+            try {
+                const q = query(collection(db, 'articles'), orderBy('createdAt', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">No articles yet. Write your first one!</div>';
+                    return;
+                }
+
+                grid.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const article = doc.data();
+                    const categoryColors = {
+                        'GEAR REVIEW': 'bg-green-100 text-green-700',
+                        'STYLE GUIDE': 'bg-blue-100 text-blue-700',
+                        'STRATEGY': 'bg-purple-100 text-purple-700',
+                        'EQUIPMENT': 'bg-red-100 text-red-700',
+                        'TRAINING': 'bg-orange-100 text-orange-700'
+                    };
+                    const categoryColor = categoryColors[article.category] || 'bg-gray-100 text-gray-700';
+                    const date = article.createdAt ? new Date(article.createdAt.seconds * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Recently';
+                    
+                    grid.innerHTML += `
+                        <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                            <div class="aspect-video golf-green flex items-center justify-center">
+                                <span class="text-white text-6xl">${article.icon}</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="px-3 py-1 ${categoryColor} text-xs font-semibold rounded-full">${article.category}</span>
+                                    <span class="text-sm text-gray-500">${date}</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">${article.title}</h3>
+                                <p class="text-gray-700 mb-4 leading-relaxed">${article.excerpt}</p>
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <span>⏱️</span>
+                                        <span>${article.readTime} min read</span>
+                                    </div>
+                                    ${article.tag ? `
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <span>💰</span>
+                                        <span>${article.tag}</span>
+                                    </div>
+                                    ` : ''}
+                                </div>
+                                <a href="${article.url || '#latest'}" class="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                                    Read Full Review
+                                    <span>→</span>
+                                </a>
+                            </div>
+                        </article>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-red-600">Error loading articles. Please refresh.</div>';
+            }
+        }
+
+        // Load manage content
+        async function loadManageContent() {
+            // Load articles for management
+            const articlesList = document.getElementById('manageArticlesList');
+            articlesList.innerHTML = '<div class="text-center py-4">Loading...</div>';
+            
+            try {
+                const q = query(collection(db, 'articles'), orderBy('createdAt', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    articlesList.innerHTML = '<div class="text-center py-4 text-gray-500">No articles yet</div>';
+                } else {
+                    articlesList.innerHTML = '';
+                    querySnapshot.forEach((docSnap) => {
+                        const article = docSnap.data();
+                        const date = article.createdAt ? new Date(article.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown';
+                        
+                        articlesList.innerHTML += `
+                            <div class="border rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex-1">
+                                    <h4 class="font-bold">${article.title}</h4>
+                                    <p class="text-sm text-gray-600">${article.category} • ${date}</p>
+                                </div>
+                                <button onclick="deleteArticle('${docSnap.id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                    Delete
+                                </button>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading articles for management:', error);
+                articlesList.innerHTML = '<div class="text-center py-4 text-red-600">Error loading articles</div>';
+            }
+
+            // Load products for management
+            const productsList = document.getElementById('manageProductsList');
+            productsList.innerHTML = '<div class="text-center py-4">Loading...</div>';
+            
+            try {
+                const q = query(collection(db, 'featuredProducts'), orderBy('createdAt', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    productsList.innerHTML = '<div class="text-center py-4 text-gray-500">No products yet</div>';
+                } else {
+                    productsList.innerHTML = '';
+                    querySnapshot.forEach((docSnap) => {
+                        const product = docSnap.data();
+                        const date = product.createdAt ? new Date(product.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown';
+                        
+                        productsList.innerHTML += `
+                            <div class="border rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex-1">
+                                    <h4 class="font-bold">${product.name}</h4>
+                                    <p class="text-sm text-gray-600">$${product.price} • ${product.badge} • ${date}</p>
+                                </div>
+                                <button onclick="deleteProduct('${docSnap.id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                    Delete
+                                </button>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading products for management:', error);
+                productsList.innerHTML = '<div class="text-center py-4 text-red-600">Error loading products</div>';
+            }
+        }
+
+        window.deleteArticle = async function(id) {
+            if (!confirm('Are you sure you want to delete this article?')) return;
+            
+            try {
+                await deleteDoc(doc(db, 'articles', id));
+                loadArticles();
+                loadManageContent();
+                alert('Article deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting article:', error);
+                alert('Error deleting article: ' + error.message);
+            }
+        };
+
+        window.deleteProduct = async function(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            
+            try {
+                await deleteDoc(doc(db, 'featuredProducts', id));
+                loadFeaturedProducts();
+                loadManageContent();
+                alert('Product deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('Error deleting product: ' + error.message);
+            }
+        };
+
+        // Form handlers
+        document.getElementById('articleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const articleData = {
+                title: document.getElementById('articleTitle').value,
+                category: document.getElementById('articleCategory').value,
+                excerpt: document.getElementById('articleExcerpt').value,
+                readTime: parseInt(document.getElementById('articleReadTime').value),
+                icon: document.getElementById('articleIcon').value,
+                tag: document.getElementById('articleTag').value || null,
+                url: document.getElementById('articleUrl').value || null,
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, 'articles'), articleData);
+                alert('Article published successfully!');
+                closeModal('addArticle');
+                document.getElementById('articleForm').reset();
+                loadArticles();
+            } catch (error) {
+                console.error('Error adding article:', error);
+                alert('Error publishing article: ' + error.message);
+            }
+        });
+
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const productData = {
+                name: document.getElementById('productName').value,
+                badge: document.getElementById('productBadge').value,
+                icon: document.getElementById('productIcon').value,
+                iconLabel: document.getElementById('productIconLabel').value || null,
+                description: document.getElementById('productDescription').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                originalPrice: parseFloat(document.getElementById('productOriginalPrice').value) || null,
+                amazonLink: document.getElementById('productAmazonLink').value,
+                rating: parseFloat(document.getElementById('productRating').value),
+                reviews: parseInt(document.getElementById('productReviews').value),
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, 'featuredProducts'), productData);
+                alert('Product added successfully!');
+                closeModal('addProduct');
+                document.getElementById('productForm').reset();
+                loadFeaturedProducts();
+            } catch (error) {
+                console.error('Error adding product:', error);
+                alert('Error adding product: ' + error.message);
+            }
+        });
+
+        // Load initial content
+        loadFeaturedProducts();
+        loadArticles();
+    </script>
 </body>
 </html>
