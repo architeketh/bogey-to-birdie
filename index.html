@@ -278,7 +278,7 @@
     </div>
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -294,7 +294,6 @@
                     <a href="#featured" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Gear Reviews</a>
                     <a href="#latest" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Training Tips</a>
                     <a href="#gear" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Golf Style</a>
-                    <a href="#deals" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Best Deals</a>
                 </nav>
             </div>
         </div>
@@ -331,7 +330,9 @@
             </div>
             
             <div id="featuredProductsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamically populated from Firestore -->
+                <div class="col-span-full text-center py-12 text-gray-500">
+                    <p class="text-lg">No featured products yet. Login and add your first one!</p>
+                </div>
             </div>
         </div>
     </section>
@@ -345,7 +346,9 @@
             </div>
 
             <div id="latestArticlesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Dynamically populated from Firestore -->
+                <div class="col-span-full text-center py-12 text-gray-500">
+                    <p class="text-lg">No articles yet. Login and write your first one!</p>
+                </div>
             </div>
         </div>
     </section>
@@ -478,7 +481,6 @@
                     <h4 class="font-bold mb-4">Resources</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
                         <li><a href="#latest" class="hover:text-white transition-colors">Latest Reviews</a></li>
-                        <li><a href="#deals" class="hover:text-white transition-colors">Best Deals</a></li>
                         <li><a href="#featured" class="hover:text-white transition-colors">Top Picks</a></li>
                         <li><a href="mailto:contact@bogeytobirdie.golf" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
@@ -518,14 +520,14 @@
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
-        // Firebase configuration - REPLACE WITH YOUR CONFIG
+        // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDyNEGsNQ4ZHZOowd4HLrc7LL2ED2DtQGE",
+            authDomain: "bogey-to-birdie-7626e.firebaseapp.com",
+            projectId: "bogey-to-birdie-7626e",
+            storageBucket: "bogey-to-birdie-7626e.firebasestorage.app",
+            messagingSenderId: "878004163262",
+            appId: "1:878004163262:web:0e7693e5d912545d4e04ef"
         };
 
         // Initialize Firebase
@@ -602,9 +604,13 @@
                 document.getElementById('adminPanel').style.display = 'block';
                 document.getElementById('adminLoginBtn').style.display = 'none';
                 document.getElementById('adminEmail').textContent = user.email;
+                loadFeaturedProducts();
+                loadArticles();
             } else {
                 document.getElementById('adminPanel').style.display = 'none';
                 document.getElementById('adminLoginBtn').style.display = 'block';
+                loadFeaturedProducts();
+                loadArticles();
             }
         });
 
@@ -618,7 +624,7 @@
                 const querySnapshot = await getDocs(q);
                 
                 if (querySnapshot.empty) {
-                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">No featured products yet. Add your first one!</div>';
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500"><p class="text-lg">No featured products yet. Login and add your first one!</p></div>';
                     return;
                 }
 
@@ -677,7 +683,7 @@
                 const querySnapshot = await getDocs(q);
                 
                 if (querySnapshot.empty) {
-                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">No articles yet. Write your first one!</div>';
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500"><p class="text-lg">No articles yet. Login and write your first one!</p></div>';
                     return;
                 }
 
@@ -734,7 +740,6 @@
 
         // Load manage content
         async function loadManageContent() {
-            // Load articles for management
             const articlesList = document.getElementById('manageArticlesList');
             articlesList.innerHTML = '<div class="text-center py-4">Loading...</div>';
             
@@ -768,7 +773,6 @@
                 articlesList.innerHTML = '<div class="text-center py-4 text-red-600">Error loading articles</div>';
             }
 
-            // Load products for management
             const productsList = document.getElementById('manageProductsList');
             productsList.innerHTML = '<div class="text-center py-4">Loading...</div>';
             
