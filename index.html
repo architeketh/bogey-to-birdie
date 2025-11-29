@@ -384,6 +384,14 @@
                     </div>
                     
                     <div>
+                        <label class="block text-sm font-semibold mb-2">Hero Image URL (Optional)</label>
+                        <input type="url" id="articleHeroImage" placeholder="https://images.unsplash.com/photo-..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        <p class="text-xs text-gray-500 mt-1">
+                            💡 Add a hero image for your article. Recommended: 1200x600px landscape image from Unsplash or golf product photos
+                        </p>
+                    </div>
+                    
+                    <div>
                         <label class="block text-sm font-semibold mb-2">Article Content (AI-Generated or Manual)</label>
                         <textarea id="articleContent" rows="12" required placeholder="Write your article here...
 
@@ -732,6 +740,11 @@ You can also use markdown:
                     </div>
                 </div>
                 
+                <!-- Hero Image (if exists) -->
+                <div id="articleViewHeroImageContainer" style="display: none;">
+                    <img id="articleViewHeroImage" src="" alt="" class="w-full h-96 object-cover" />
+                </div>
+                
                 <!-- Article Content -->
                 <div class="p-8 md:p-12">
                     <!-- Excerpt -->
@@ -758,7 +771,7 @@ You can also use markdown:
     <!-- Newsletter Signup -->
     <section class="py-16 bg-gradient-to-r from-green-700 to-green-900 text-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-4">Join 15,000+ Golfers Getting Better</h2>
+            <h2 class="text-4xl font-bold mb-4">Join <span id="pageViewCounter">20,000</span>+ Golfers Getting Better</h2>
             <p class="text-xl mb-8 text-green-100">
                 Weekly gear reviews, course management tips, and exclusive Amazon deals delivered to your inbox
             </p>
@@ -1411,50 +1424,6 @@ You can also use markdown:
             }
         };
 
-        window.editArticle = async function(id) {
-            try {
-                // Get the article data
-                const articleDoc = await getDoc(doc(db, 'articles', id));
-                if (!articleDoc.exists()) {
-                    alert('Article not found');
-                    return;
-                }
-                
-                const article = articleDoc.data();
-                
-                // Set editing state
-                isEditingArticle = true;
-                currentArticleId = id;
-                
-                // Close manage content modal
-                closeModal('manageContent');
-                
-                // Open article modal
-                openModal('addArticle');
-                
-                // Update modal title
-                document.querySelector('#addArticleModal h2').textContent = '✏️ Edit Article';
-                
-                // Fill form with article data
-                setTimeout(() => {
-                    document.getElementById('articleTitle').value = article.title || '';
-                    document.getElementById('articleCategory').value = article.category || 'GEAR REVIEW';
-                    document.getElementById('articleExcerpt').value = article.excerpt || '';
-                    document.getElementById('articleContent').value = article.content || '';
-                    document.getElementById('articleReadTime').value = article.readTime || 8;
-                    document.getElementById('articleIcon').value = article.icon || '🏌️‍♂️';
-                    document.getElementById('articleTag').value = article.tag || '';
-                    document.getElementById('articleUrl').value = article.url || '';
-                    
-                    // Update submit button text
-                    document.querySelector('#articleForm button[type="submit"]').innerHTML = '💾 Update Article';
-                }, 100);
-            } catch (error) {
-                console.error('Error loading article for editing:', error);
-                alert('Error loading article: ' + error.message);
-            }
-        };
-
         window.deleteProduct = async function(id) {
             if (!confirm('Are you sure you want to delete this product?')) return;
             
@@ -1499,6 +1468,17 @@ You can also use markdown:
                     dateEl.textContent = `📅 ${date}`;
                 } else {
                     dateEl.textContent = '';
+                }
+                
+                // Display hero image if available
+                const heroImageContainer = document.getElementById('articleViewHeroImageContainer');
+                const heroImage = document.getElementById('articleViewHeroImage');
+                if (article.heroImage) {
+                    heroImage.src = article.heroImage;
+                    heroImage.alt = article.title;
+                    heroImageContainer.style.display = 'block';
+                } else {
+                    heroImageContainer.style.display = 'none';
                 }
                 
                 // Process content
@@ -1640,6 +1620,7 @@ You can also use markdown:
                 document.getElementById('articleTitle').value = article.title;
                 document.getElementById('articleCategory').value = article.category;
                 document.getElementById('articleExcerpt').value = article.excerpt;
+                document.getElementById('articleHeroImage').value = article.heroImage || '';
                 document.getElementById('articleContent').value = article.content || '';
                 document.getElementById('articleReadTime').value = article.readTime;
                 document.getElementById('articleIcon').value = article.icon;
@@ -1876,6 +1857,7 @@ You can also use markdown:
                 title: document.getElementById('articleTitle').value,
                 category: document.getElementById('articleCategory').value,
                 excerpt: document.getElementById('articleExcerpt').value,
+                heroImage: document.getElementById('articleHeroImage').value || null,
                 content: document.getElementById('articleContent').value || null,
                 readTime: parseInt(document.getElementById('articleReadTime').value),
                 icon: document.getElementById('articleIcon').value,
