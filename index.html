@@ -385,9 +385,10 @@
                     
                     <div>
                         <label class="block text-sm font-semibold mb-2">Hero Image URL (Optional)</label>
-                        <input type="url" id="articleHeroImage" placeholder="https://images.unsplash.com/photo-..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        <input type="url" id="articleHeroImage" placeholder="https://example.com/image.jpg" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
                         <p class="text-xs text-gray-500 mt-1">
-                            💡 Add a hero image for your article. Recommended: 1200x600px landscape image from Unsplash or golf product photos
+                            📸 Paste direct link to image file (.jpg, .png, .gif, .webp)<br>
+                            <span class="text-green-700 font-semibold">Examples:</span> Unsplash, Amazon product images, Imgur, your own hosted images
                         </p>
                     </div>
                     
@@ -1288,9 +1289,15 @@ You can also use markdown:
                     
                     grid.innerHTML += `
                         <article class="bg-white rounded-xl overflow-hidden shadow-lg card-hover" ${clickAction}>
-                            <div class="aspect-video golf-green flex items-center justify-center">
-                                <span class="text-white text-6xl">${article.icon}</span>
-                            </div>
+                            ${article.heroImage ? `
+                                <div class="aspect-video overflow-hidden">
+                                    <img src="${article.heroImage}" alt="${article.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                                </div>
+                            ` : `
+                                <div class="aspect-video golf-green flex items-center justify-center">
+                                    <span class="text-white text-6xl">${article.icon}</span>
+                                </div>
+                            `}
                             <div class="p-6">
                                 <div class="flex items-center gap-3 mb-3">
                                     <span class="px-3 py-1 ${categoryColor} text-xs font-semibold rounded-full">${article.category}</span>
