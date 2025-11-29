@@ -103,101 +103,6 @@
 
 
     <!-- Bulk Import Modal -->
-    <div id="bulkImportModal" class="modal">
-        <div class="modal-content">
-            <div class="p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold">⚡ Bulk Import Products</h2>
-                    <button onclick="closeModal('bulkImport')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-                </div>
-
-                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                    <p class="text-sm text-yellow-800 mb-2">
-                        <strong>Import multiple products at once!</strong>
-                    </p>
-                    <p class="text-sm text-yellow-700">
-                        Paste Amazon product ASINs (one per line) or follow the guide below to extract them from lists/carts.
-                    </p>
-                </div>
-
-                <!-- Step 1: Extract ASINs from Amazon -->
-                <div class="mb-6">
-                    <h3 class="font-bold text-lg mb-3">📋 Step 1: Get ASINs from Amazon</h3>
-                    
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                        <p class="font-semibold text-blue-900 mb-2">Method A: From Your Amazon List/Cart</p>
-                        <ol class="text-sm text-blue-800 space-y-2 ml-4">
-                            <li>1. Go to your Amazon cart or list</li>
-                            <li>2. Right-click on the page → "View Page Source" (or Ctrl+U)</li>
-                            <li>3. Press Ctrl+F to search</li>
-                            <li>4. Search for: <code class="bg-blue-100 px-2 py-1 rounded">/dp/</code></li>
-                            <li>5. Copy all the 10-character ASINs (like B084RNGWQJ)</li>
-                            <li>6. Paste them below (one per line)</li>
-                        </ol>
-                    </div>
-
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                        <p class="font-semibold text-green-900 mb-2">Method B: From Product Pages</p>
-                        <ol class="text-sm text-green-800 space-y-2 ml-4">
-                            <li>1. Open each product in a new tab</li>
-                            <li>2. Look at the URL: <code class="bg-green-100 px-2 py-1 rounded">amazon.com/dp/B084RNGWQJ</code></li>
-                            <li>3. Copy the ASIN (B084RNGWQJ)</li>
-                            <li>4. Paste all ASINs below (one per line)</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 2: Paste ASINs -->
-                <div class="mb-6">
-                    <h3 class="font-bold text-lg mb-3">⚡ Step 2: Paste ASINs Here</h3>
-                    <textarea 
-                        id="bulkAsinInput" 
-                        rows="10"
-                        placeholder="B084RNGWQJ
-B084RDPG2P
-B07TWDBYVW
-B001GXP1BO
-B005NHVN4Q
-
-Paste one ASIN per line..."
-                        class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none font-mono text-sm"
-                    ></textarea>
-                    <p class="text-xs text-gray-500 mt-2">
-                        You can paste 10-100 ASINs at once. Each will get your affiliate tag automatically!
-                    </p>
-                </div>
-
-                <!-- Step 3: Process -->
-                <button onclick="processBulkAsins()" class="w-full px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-bold mb-4">
-                    🚀 Process ASINs & Generate Affiliate Links
-                </button>
-
-                <!-- Results -->
-                <div id="bulkImportResults" style="display: none;" class="mt-6">
-                    <h3 class="font-bold text-lg mb-3">✅ Generated Affiliate Links</h3>
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                        <p class="text-sm text-green-800 mb-2">
-                            <strong id="bulkCount">0</strong> products ready to import!
-                        </p>
-                    </div>
-                    
-                    <div id="bulkProductList" class="space-y-3 max-h-96 overflow-y-auto mb-4">
-                        <!-- Products listed here -->
-                    </div>
-
-                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-                        <p class="text-sm text-yellow-800">
-                            <strong>Next:</strong> Click on each product link below to open Amazon, then copy product details (name, price, image URL, description) and add them one by one using Quick Add.
-                        </p>
-                    </div>
-
-                    <button onclick="closeModal('bulkImport')" class="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all font-bold">
-                        ✅ Got It - Start Adding Products
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Quick Add Amazon Product Modal -->
     <div id="quickAddAmazonModal" class="modal">
@@ -390,12 +295,11 @@ You can also use markdown:
                         <div>
                             <label class="block text-sm font-semibold mb-2">Category</label>
                             <select id="productCategory" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                                <option value="GPS & Tech">GPS & Tech</option>
-                                <option value="Training Aids">Training Aids</option>
-                                <option value="Clubs & Equipment">Clubs & Equipment</option>
-                                <option value="Golf Apparel">Golf Apparel</option>
                                 <option value="Golf Balls">Golf Balls</option>
-                                <option value="Accessories">Accessories</option>
+                                <option value="Golf Clothing">Golf Clothing</option>
+                                <option value="Golf Clubs">Golf Clubs</option>
+                                <option value="Tech & GPS">Tech & GPS</option>
+                                <option value="Training Aids">Training Aids</option>
                             </select>
                         </div>
                         <div>
@@ -425,11 +329,11 @@ You can also use markdown:
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-semibold mb-2">Current Price ($)</label>
-                            <input type="number" id="productPrice" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                            <input type="number" id="productPrice" step="0.01" min="0" placeholder="33.95" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold mb-2">Original Price ($)</label>
-                            <input type="number" id="productOriginalPrice" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                            <input type="number" id="productOriginalPrice" step="0.01" min="0" placeholder="49.99" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
                         </div>
                     </div>
                     <div>
@@ -515,10 +419,6 @@ You can also use markdown:
                                 <p class="text-xs text-green-100">Logged in</p>
                             </div>
                             <div class="py-2">
-                                <button onclick="openModal('bulkImport'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
-                                    <span class="text-xl">⚡</span>
-                                    <span class="font-semibold">Bulk Import Products</span>
-                                </button>
                                 <button onclick="openModal('quickAddAmazon'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
                                     <span class="text-xl">🛒</span>
                                     <span class="font-semibold">Quick Add Amazon Product</span>
@@ -770,7 +670,7 @@ You can also use markdown:
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, getDoc, deleteDoc, updateDoc, doc, query, where, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         // Firebase configuration
         const firebaseConfig = {
@@ -789,6 +689,10 @@ You can also use markdown:
         const provider = new GoogleAuthProvider();
 
         const ADMIN_EMAIL = "architek.eth@gmail.com";
+
+        // Article editing state
+        let isEditingArticle = false;
+        let currentArticleId = null;
 
         // Global functions
         window.signIn = async function() {
@@ -817,7 +721,6 @@ You can also use markdown:
 
         window.openModal = function(modalName) {
             const modalMap = {
-                'bulkImport': 'bulkImportModal',
                 'quickAddAmazon': 'quickAddAmazonModal',
                 'addArticle': 'addArticleModal',
                 'addProduct': 'addProductModal',
@@ -833,16 +736,10 @@ You can also use markdown:
                 document.getElementById('amazonLinkResult').style.display = 'none';
                 document.getElementById('amazonLinkError').style.display = 'none';
             }
-            if (modalName === 'bulkImport') {
-                // Reset the form
-                document.getElementById('bulkAsinInput').value = '';
-                document.getElementById('bulkImportResults').style.display = 'none';
-            }
         };
 
         window.closeModal = function(modalName) {
             const modalMap = {
-                'bulkImport': 'bulkImportModal',
                 'quickAddAmazon': 'quickAddAmazonModal',
                 'addArticle': 'addArticleModal',
                 'addProduct': 'addProductModal',
@@ -892,106 +789,6 @@ You can also use markdown:
             document.getElementById('extractedAsin').textContent = asin;
             document.getElementById('affiliateLink').textContent = affiliateLink;
             resultDiv.style.display = 'block';
-        };
-
-        // Bulk ASIN processing
-        window.processBulkAsins = function() {
-            const input = document.getElementById('bulkAsinInput').value.trim();
-            const resultsDiv = document.getElementById('bulkImportResults');
-            const productList = document.getElementById('bulkProductList');
-            const countEl = document.getElementById('bulkCount');
-
-            if (!input) {
-                alert('Please paste some ASINs first!');
-                return;
-            }
-
-            // Extract ASINs from input
-            const lines = input.split('\n');
-            const asins = [];
-            
-            for (const line of lines) {
-                const trimmed = line.trim();
-                if (!trimmed) continue;
-                
-                // Try to extract ASIN from the line
-                // ASINs are 10 characters: B followed by 9 alphanumeric
-                const asinMatch = trimmed.match(/\b(B[A-Z0-9]{9})\b/);
-                if (asinMatch) {
-                    asins.push(asinMatch[1]);
-                } else if (/^[A-Z0-9]{10}$/.test(trimmed)) {
-                    // If line is exactly 10 chars, might be an ASIN
-                    asins.push(trimmed);
-                }
-            }
-
-            if (asins.length === 0) {
-                alert('No valid ASINs found. Please check your input.\n\nASINs are 10-character codes like: B084RNGWQJ');
-                return;
-            }
-
-            // Remove duplicates
-            const uniqueAsins = [...new Set(asins)];
-
-            // Generate affiliate links
-            productList.innerHTML = '';
-            uniqueAsins.forEach((asin, index) => {
-                const affiliateLink = `https://www.amazon.com/dp/${asin}?tag=${AFFILIATE_TAG}`;
-                const productUrl = `https://www.amazon.com/dp/${asin}`;
-                
-                productList.innerHTML += `
-                    <div class="border rounded-lg p-4 bg-white hover:bg-gray-50">
-                        <div class="flex items-center justify-between">
-                            <div class="flex-1">
-                                <p class="font-bold text-gray-900">${index + 1}. ASIN: ${asin}</p>
-                                <p class="text-xs text-gray-500 mt-1 break-all">
-                                    <strong>Affiliate Link:</strong> ${affiliateLink}
-                                </p>
-                            </div>
-                            <div class="flex gap-2 ml-4">
-                                <a href="${productUrl}" 
-                                   target="_blank" 
-                                   class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm whitespace-nowrap">
-                                    🔗 View on Amazon
-                                </a>
-                                <button onclick="quickAddFromAsin('${asin}')" 
-                                        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm whitespace-nowrap">
-                                    ➕ Quick Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            countEl.textContent = uniqueAsins.length;
-            resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
-        };
-
-        // Quick add from ASIN
-        window.quickAddFromAsin = function(asin) {
-            const affiliateLink = `https://www.amazon.com/dp/${asin}?tag=${AFFILIATE_TAG}`;
-            
-            // Store for later use
-            currentAffiliateLink = affiliateLink;
-            currentAsin = asin;
-            
-            // Close bulk import modal
-            closeModal('bulkImport');
-            
-            // Open product form
-            openModal('addProduct');
-            
-            // Pre-fill the Amazon link
-            setTimeout(() => {
-                document.getElementById('productAmazonLink').value = affiliateLink;
-                document.getElementById('productBadge').value = 'FEATURED';
-                document.getElementById('productName').focus();
-                
-                // Open Amazon in new tab so they can copy details
-                window.open(`https://www.amazon.com/dp/${asin}`, '_blank');
-            }, 100);
         };
 
         window.processAmazonUrl = function() {
@@ -1292,9 +1089,14 @@ You can also use markdown:
                                     <h4 class="font-bold">${article.title}</h4>
                                     <p class="text-sm text-gray-600">${article.category} • ${date}</p>
                                 </div>
-                                <button onclick="deleteArticle('${docSnap.id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
-                                    Delete
-                                </button>
+                                <div class="flex gap-2">
+                                    <button onclick="editArticle('${docSnap.id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                                        Edit
+                                    </button>
+                                    <button onclick="deleteArticle('${docSnap.id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         `;
                     });
@@ -1374,35 +1176,30 @@ You can also use markdown:
             const grid = document.getElementById('categoryGrid');
             
             const categoryConfig = {
-                'GPS & Tech': {
-                    image: 'https://images.unsplash.com/photo-1508056357687-c58c90bb3cce?w=600&q=80&fit=crop',
-                    color: 'orange',
-                    description: 'Smart devices for smarter course management'
-                },
-                'Training Aids': {
-                    image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80&fit=crop',
-                    color: 'purple',
-                    description: 'Tools that actually improve your swing'
-                },
-                'Clubs & Equipment': {
-                    image: 'https://images.unsplash.com/photo-1593111774240-d529f12a7a19?w=600&q=80&fit=crop',
-                    color: 'green',
-                    description: 'Game-improvement sets that look tour-ready'
-                },
-                'Golf Apparel': {
-                    image: 'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&q=80&fit=crop',
-                    color: 'blue',
-                    description: 'Performance wear that doesn\'t break the bank'
-                },
                 'Golf Balls': {
                     image: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=600&q=80&fit=crop',
                     color: 'yellow',
                     description: 'Premium balls for every skill level'
                 },
-                'Accessories': {
-                    image: 'https://images.unsplash.com/photo-1530028828-25e8270e10e6?w=600&q=80&fit=crop',
-                    color: 'gray',
-                    description: 'Essential gear for every round'
+                'Golf Clothing': {
+                    image: 'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&q=80&fit=crop',
+                    color: 'blue',
+                    description: 'Performance wear that looks great'
+                },
+                'Golf Clubs': {
+                    image: 'https://images.unsplash.com/photo-1593111774240-d529f12a7a19?w=600&q=80&fit=crop',
+                    color: 'green',
+                    description: 'Game-improvement clubs that perform'
+                },
+                'Tech & GPS': {
+                    image: 'https://images.unsplash.com/photo-1508056357687-c58c90bb3cce?w=600&q=80&fit=crop',
+                    color: 'orange',
+                    description: 'Smart devices for better scores'
+                },
+                'Training Aids': {
+                    image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80&fit=crop',
+                    color: 'purple',
+                    description: 'Tools that improve your game'
                 }
             };
             
