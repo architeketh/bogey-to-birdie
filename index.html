@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bogey to Birdie - Golf Tips, Gear & Style for the Aspiring Low Handicapper</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; img-src 'self' data: https:; frame-src 'self' https://accounts.google.com;">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
         
@@ -317,7 +316,7 @@
                 </a>
             </div>
             <div class="mt-12 text-sm text-green-200">
-                <p>⭐ Over 50,000+ bogey golfers trust our recommendations</p>
+                <p>⭐ Over <span id="golferCounter">20,000</span>+ bogey golfers trust our recommendations</p>
             </div>
         </div>
     </section>
@@ -412,14 +411,16 @@
             <div class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
                 <input 
                     type="email" 
+                    id="newsletterEmail"
                     placeholder="Enter your email address" 
                     class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg outline-none"
                 />
-                <button class="px-8 py-4 bg-white text-green-800 font-bold rounded-lg hover:bg-green-50 transition-all text-lg whitespace-nowrap">
+                <button onclick="subscribeNewsletter()" class="px-8 py-4 bg-white text-green-800 font-bold rounded-lg hover:bg-green-50 transition-all text-lg whitespace-nowrap">
                     Subscribe Free
                 </button>
             </div>
             <p class="text-sm text-green-200 mt-4">No spam. Unsubscribe anytime. We respect your inbox.</p>
+            <p id="newsletterMessage" class="text-sm mt-2" style="display: none;"></p>
         </div>
     </section>
 
@@ -885,4 +886,85 @@
                 alert('Product added successfully!');
                 closeModal('addProduct');
                 document.getElementById('productForm').reset();
-                loadFeaturedP
+                loadFeaturedProducts();
+            } catch (error) {
+                console.error('Error adding product:', error);
+                alert('Error adding product: ' + error.message);
+            }
+        });
+
+        // Newsletter subscription function
+        window.subscribeNewsletter = async function() {
+            const emailInput = document.getElementById('newsletterEmail');
+            const messageEl = document.getElementById('newsletterMessage');
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                messageEl.textContent = 'Please enter your email address';
+                messageEl.style.color = '#fca5a5';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            // Basic email validation
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageEl.textContent = 'Please enter a valid email address';
+                messageEl.style.color = '#fca5a5';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, 'newsletterSignups'), {
+                    email: email,
+                    subscribedAt: serverTimestamp(),
+                    source: 'website'
+                });
+                
+                messageEl.textContent = '✅ Thanks for subscribing! Check your inbox soon.';
+                messageEl.style.color = '#86efac';
+                messageEl.style.display = 'block';
+                emailInput.value = '';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            } catch (error) {
+                console.error('Error subscribing:', error);
+                messageEl.textContent = 'Error subscribing. Please try again.';
+                messageEl.style.color = '#fca5a5';
+                messageEl.style.display = 'block';
+            }
+        };
+
+        // Counter animation - starts at 20,000 and counts up slowly
+        function animateCounter() {
+            const counterEl = document.getElementById('golferCounter');
+            if (!counterEl) return;
+
+            let current = 20000;
+            const target = 20000 + Math.floor(Math.random() * 500); // Random between 20,000-20,500
+            const increment = Math.ceil((target - current) / 100);
+            const duration = 2000; // 2 seconds
+            const stepTime = duration / ((target - current) / increment);
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counterEl.textContent = current.toLocaleString();
+            }, stepTime);
+        }
+
+        // Start counter animation when page loads
+        setTimeout(animateCounter, 500);
+
+        // Load initial content
+        loadFeaturedProducts();
+        loadArticles();
+    </script>
+</body>
+</html>
