@@ -100,47 +100,6 @@
 <body class="bg-gray-50">
     
     <!-- Admin Login Button (Top Right) -->
-    <div id="adminLoginBtn" class="fixed top-4 right-4 z-50" style="display: none;">
-        <button onclick="signIn()" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all shadow-lg">
-            🔐 Admin Login
-        </button>
-    </div>
-
-    <!-- Admin Panel (Bottom Right - Only visible when logged in) -->
-    <div id="adminPanel" class="admin-panel" style="display: none;">
-        <div class="bg-white rounded-lg shadow-2xl p-4 border-2 border-green-700">
-            <div class="flex items-center gap-3 mb-4 pb-4 border-b">
-                <div class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center">
-                    <span class="text-white font-bold">👤</span>
-                </div>
-                <div class="flex-1">
-                    <p class="font-semibold text-sm" id="adminEmail">Admin</p>
-                    <p class="text-xs text-gray-500">Logged in</p>
-                </div>
-            </div>
-            <div class="space-y-2">
-                <button onclick="openModal('bulkImport')" class="w-full px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-all text-sm font-semibold">
-                    ⚡ Bulk Import Products
-                </button>
-                <button onclick="openModal('quickAddAmazon')" class="w-full px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-all text-sm font-semibold">
-                    🛒 Quick Add Amazon Product
-                </button>
-                <button onclick="openModal('addArticle')" class="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all text-sm font-semibold">
-                    ✍️ Add Article
-                </button>
-                <button onclick="openModal('addProduct')" class="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-all text-sm font-semibold">
-                    🏌️ Add Top Pick
-                </button>
-                <button onclick="openModal('manageContent')" class="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-all text-sm font-semibold">
-                    📋 Manage Content
-                </button>
-                <button onclick="signOut()" class="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-all text-sm font-semibold">
-                    🚪 Logout
-                </button>
-            </div>
-        </div>
-    </div>
-
 
 
     <!-- Bulk Import Modal -->
@@ -318,47 +277,94 @@ Paste one ASIN per line..."
 
     <!-- Add Article Modal -->
     <div id="addArticleModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px;">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold">✍️ Add New Article</h2>
+                    <h2 class="text-2xl font-bold">✍️ Add New Article (AI-Ready)</h2>
                     <button onclick="closeModal('addArticle')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
                 </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-blue-900 font-semibold mb-2">💡 AI-Driven Content with Product Placeholders</p>
+                    <p class="text-sm text-blue-800 mb-2">Write your article content below. Use product placeholders to automatically insert Amazon affiliate links!</p>
+                    <p class="text-xs text-blue-700 font-mono bg-blue-100 p-2 rounded mt-2">
+                        Example: "Check out the {{PRODUCT:B084RNGWQJ}} for accurate yardages."
+                    </p>
+                </div>
+                
                 <form id="articleForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Article Title</label>
-                        <input type="text" id="articleTitle" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Article Title</label>
+                            <input type="text" id="articleTitle" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Category</label>
+                            <select id="articleCategory" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                                <option value="GEAR REVIEW">Gear Review</option>
+                                <option value="STYLE GUIDE">Style Guide</option>
+                                <option value="STRATEGY">Strategy</option>
+                                <option value="EQUIPMENT">Equipment</option>
+                                <option value="TRAINING">Training</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Category</label>
-                        <select id="articleCategory" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                            <option value="GEAR REVIEW">Gear Review</option>
-                            <option value="STYLE GUIDE">Style Guide</option>
-                            <option value="STRATEGY">Strategy</option>
-                            <option value="EQUIPMENT">Equipment</option>
-                            <option value="TRAINING">Training</option>
-                        </select>
-                    </div>
+                    
                     <div>
                         <label class="block text-sm font-semibold mb-2">Excerpt (Short Description)</label>
-                        <textarea id="articleExcerpt" rows="3" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
+                        <textarea id="articleExcerpt" rows="2" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
                     </div>
+                    
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Read Time (minutes)</label>
-                        <input type="number" id="articleReadTime" value="8" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        <label class="block text-sm font-semibold mb-2">Article Content (AI-Generated or Manual)</label>
+                        <textarea id="articleContent" rows="12" required placeholder="Write your article here...
+
+Use product placeholders like this:
+{{PRODUCT:B084RNGWQJ}}
+
+This will be replaced with:
+[Product Name](affiliate link)
+
+You can also use markdown:
+**Bold text**
+*Italic text*
+- Bullet points
+1. Numbered lists" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">
+                            💡 Paste AI-generated content or write manually. Product placeholders will be converted automatically!
+                        </p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Icon Emoji</label>
-                        <input type="text" id="articleIcon" value="🏌️‍♂️" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Read Time (min)</label>
+                            <input type="number" id="articleReadTime" value="8" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Icon Emoji</label>
+                            <input type="text" id="articleIcon" value="🏌️‍♂️" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Tag/Badge</label>
+                            <input type="text" id="articleTag" placeholder="Featured" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
                     </div>
+                    
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Tag/Badge (optional)</label>
-                        <input type="text" id="articleTag" placeholder="e.g., Budget-Friendly Options" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Article URL/Link (optional)</label>
+                        <label class="block text-sm font-semibold mb-2">Article URL/Link (optional - for external articles)</label>
                         <input type="url" id="articleUrl" placeholder="https://..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        <p class="text-xs text-gray-500 mt-1">Leave blank to use content above, or link to external article</p>
                     </div>
+                    
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p class="text-sm text-yellow-900 font-semibold mb-2">🤖 Product Placeholder Examples:</p>
+                        <div class="space-y-1 text-xs font-mono text-yellow-800">
+                            <p>{{PRODUCT:B084RNGWQJ}} → Garmin Approach S62 with affiliate link</p>
+                            <p>{{PRODUCT:B001GXP1BO}} → Orange Whip Trainer with affiliate link</p>
+                            <p>{{PRODUCT:B07TWDBYVW}} → Bushnell Tour V5 with affiliate link</p>
+                        </div>
+                    </div>
+                    
                     <button type="submit" class="w-full px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all font-bold">
                         📝 Publish Article
                     </button>
@@ -386,9 +392,9 @@ Paste one ASIN per line..."
                     </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2">Product Image URL</label>
-                        <input type="url" id="productImageUrl" placeholder="https://m.media-amazon.com/images/I/..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                        <p class="text-xs text-gray-500 mt-1">
-                            💡 Tip: Right-click on the product image on Amazon → "Copy image address"
+                        <input type="url" id="productImageUrl" required placeholder="https://m.media-amazon.com/images/I/..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        <p class="text-xs text-red-600 mt-1 font-semibold">
+                            ⚠️ Required: Right-click on the product image on Amazon → "Copy image address"
                         </p>
                     </div>
                     <div>
@@ -478,10 +484,56 @@ Paste one ASIN per line..."
                         <p class="text-xs text-gray-600">Your Path to Lower Scores</p>
                     </div>
                 </div>
-                <nav class="hidden md:flex gap-6">
+                <nav class="hidden md:flex gap-6 items-center">
                     <a href="#featured" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Gear Reviews</a>
                     <a href="#latest" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Training Tips</a>
                     <a href="#gear" class="text-gray-700 hover:text-green-700 font-semibold transition-colors">Golf Style</a>
+                    
+                    <!-- Admin Menu (Only visible when logged in) -->
+                    <div id="adminMenu" class="relative" style="display: none;">
+                        <button onclick="toggleAdminDropdown()" class="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all font-semibold">
+                            <span>⚙️</span>
+                            <span id="adminMenuLabel">Admin</span>
+                            <span id="dropdownArrow">▼</span>
+                        </button>
+                        <div id="adminDropdown" class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-2xl border-2 border-green-700 overflow-hidden z-50" style="display: none;">
+                            <div class="bg-green-700 text-white px-4 py-3 border-b border-green-600">
+                                <p class="font-semibold text-sm" id="adminEmailHeader">Admin</p>
+                                <p class="text-xs text-green-100">Logged in</p>
+                            </div>
+                            <div class="py-2">
+                                <button onclick="openModal('bulkImport'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
+                                    <span class="text-xl">⚡</span>
+                                    <span class="font-semibold">Bulk Import Products</span>
+                                </button>
+                                <button onclick="openModal('quickAddAmazon'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
+                                    <span class="text-xl">🛒</span>
+                                    <span class="font-semibold">Quick Add Amazon Product</span>
+                                </button>
+                                <button onclick="openModal('addArticle'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
+                                    <span class="text-xl">✍️</span>
+                                    <span class="font-semibold">Add Article</span>
+                                </button>
+                                <button onclick="openModal('addProduct'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3">
+                                    <span class="text-xl">🏌️</span>
+                                    <span class="font-semibold">Add Featured Product</span>
+                                </button>
+                                <button onclick="openModal('manageContent'); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center gap-3 border-t">
+                                    <span class="text-xl">📋</span>
+                                    <span class="font-semibold">Manage Content</span>
+                                </button>
+                                <button onclick="signOut(); toggleAdminDropdown();" class="w-full px-4 py-3 text-left hover:bg-red-50 transition-colors flex items-center gap-3 border-t text-red-600">
+                                    <span class="text-xl">🚪</span>
+                                    <span class="font-semibold">Logout</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Login Button (Only visible when logged out) -->
+                    <button id="adminLoginBtn" onclick="signIn()" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all font-semibold" style="display: none;">
+                        🔐 Login
+                    </button>
                 </nav>
             </div>
         </div>
@@ -522,7 +574,7 @@ Paste one ASIN per line..."
     <section id="featured" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">🔥 This Month's Must-Haves</h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">⭐ This Month's Featured Items</h2>
                 <p class="text-xl text-gray-600">The gear that's actually making a difference for bogey golfers</p>
             </div>
             
@@ -1053,17 +1105,51 @@ Paste one ASIN per line..."
             }
         };
 
+        // Toggle admin dropdown
+        window.toggleAdminDropdown = function() {
+            const dropdown = document.getElementById('adminDropdown');
+            const arrow = document.getElementById('dropdownArrow');
+            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+                dropdown.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                dropdown.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        };
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const adminMenu = document.getElementById('adminMenu');
+            const dropdown = document.getElementById('adminDropdown');
+            if (adminMenu && dropdown && !adminMenu.contains(event.target)) {
+                dropdown.style.display = 'none';
+                document.getElementById('dropdownArrow').textContent = '▼';
+            }
+        });
+
         // Auth state observer
         onAuthStateChanged(auth, (user) => {
             if (user && user.email === ADMIN_EMAIL) {
-                document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('adminLoginBtn').style.display = 'none';
-                document.getElementById('adminEmail').textContent = user.email;
+                // Show admin menu in header
+                const adminMenu = document.getElementById('adminMenu');
+                const adminLoginBtn = document.getElementById('adminLoginBtn');
+                if (adminMenu) adminMenu.style.display = 'block';
+                if (adminLoginBtn) adminLoginBtn.style.display = 'none';
+                
+                // Update email in dropdown
+                const adminEmailHeader = document.getElementById('adminEmailHeader');
+                if (adminEmailHeader) adminEmailHeader.textContent = user.email;
+                
                 loadFeaturedProducts();
                 loadArticles();
             } else {
-                document.getElementById('adminPanel').style.display = 'none';
-                document.getElementById('adminLoginBtn').style.display = 'block';
+                // Show login button, hide admin menu
+                const adminMenu = document.getElementById('adminMenu');
+                const adminLoginBtn = document.getElementById('adminLoginBtn');
+                if (adminMenu) adminMenu.style.display = 'none';
+                if (adminLoginBtn) adminLoginBtn.style.display = 'block';
+                
                 loadFeaturedProducts();
                 loadArticles();
             }
@@ -1305,6 +1391,7 @@ Paste one ASIN per line..."
                 title: document.getElementById('articleTitle').value,
                 category: document.getElementById('articleCategory').value,
                 excerpt: document.getElementById('articleExcerpt').value,
+                content: document.getElementById('articleContent').value || null,
                 readTime: parseInt(document.getElementById('articleReadTime').value),
                 icon: document.getElementById('articleIcon').value,
                 tag: document.getElementById('articleTag').value || null,
