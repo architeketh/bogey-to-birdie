@@ -386,9 +386,22 @@ You can also use markdown:
                         <label class="block text-sm font-semibold mb-2">Product Name</label>
                         <input type="text" id="productName" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Badge (e.g., BEST SELLER, HOT DEAL)</label>
-                        <input type="text" id="productBadge" value="FEATURED" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Category</label>
+                            <select id="productCategory" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                                <option value="GPS & Tech">GPS & Tech</option>
+                                <option value="Training Aids">Training Aids</option>
+                                <option value="Clubs & Equipment">Clubs & Equipment</option>
+                                <option value="Golf Apparel">Golf Apparel</option>
+                                <option value="Golf Balls">Golf Balls</option>
+                                <option value="Accessories">Accessories</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Badge (e.g., BEST SELLER, HOT DEAL)</label>
+                            <input type="text" id="productBadge" value="FEATURED" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                        </div>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2">Product Image URL</label>
@@ -607,65 +620,33 @@ You can also use markdown:
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-                <p class="text-xl text-gray-600">Everything you need to level up your game</p>
+                <p class="text-xl text-gray-600">Curated products selected by our experts</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="https://www.amazon.com/s?k=golf+clubs+game+improvement&tag=bogeytobird0e-20" target="_blank" rel="nofollow noopener" class="group">
-                    <div class="relative overflow-hidden rounded-xl card-hover border-2 border-gray-200 bg-white h-64">
-                        <img src="https://images.unsplash.com/photo-1593111774240-d529f12a7a19?w=600&q=80&fit=crop" 
-                             alt="Golf clubs" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <h3 class="text-2xl font-bold mb-2">Clubs & Irons</h3>
-                            <p class="text-sm text-gray-200 mb-3">Game-improvement sets that look tour-ready</p>
-                            <span class="text-green-400 font-semibold group-hover:underline">Shop Clubs →</span>
-                        </div>
-                    </div>
-                </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="categoryGrid">
+                <!-- Categories will be loaded dynamically -->
+                <div class="col-span-full text-center py-12">
+                    <div class="animate-spin w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Loading categories...</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <a href="https://www.amazon.com/s?k=golf+apparel+men&tag=bogeytobird0e-20" target="_blank" rel="nofollow noopener" class="group">
-                    <div class="relative overflow-hidden rounded-xl card-hover border-2 border-gray-200 bg-white h-64">
-                        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&q=80&fit=crop" 
-                             alt="Golf apparel" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <h3 class="text-2xl font-bold mb-2">Golf Apparel</h3>
-                            <p class="text-sm text-gray-200 mb-3">Performance wear that doesn't break the bank</p>
-                            <span class="text-blue-400 font-semibold group-hover:underline">Shop Apparel →</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://www.amazon.com/s?k=golf+training+aids&tag=bogeytobird0e-20" target="_blank" rel="nofollow noopener" class="group">
-                    <div class="relative overflow-hidden rounded-xl card-hover border-2 border-gray-200 bg-white h-64">
-                        <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80&fit=crop" 
-                             alt="Golf training" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <h3 class="text-2xl font-bold mb-2">Training Aids</h3>
-                            <p class="text-sm text-gray-200 mb-3">Tools that actually improve your swing</p>
-                            <span class="text-purple-400 font-semibold group-hover:underline">Shop Training →</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://www.amazon.com/s?k=golf+gps+watch&tag=bogeytobird0e-20" target="_blank" rel="nofollow noopener" class="group">
-                    <div class="relative overflow-hidden rounded-xl card-hover border-2 border-gray-200 bg-white h-64">
-                        <img src="https://images.unsplash.com/photo-1508056357687-c58c90bb3cce?w=600&q=80&fit=crop" 
-                             alt="Golf GPS technology" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <h3 class="text-2xl font-bold mb-2">Tech & GPS</h3>
-                            <p class="text-sm text-gray-200 mb-3">Smart devices for smarter course management</p>
-                            <span class="text-orange-400 font-semibold group-hover:underline">Shop Tech →</span>
-                        </div>
-                    </div>
-                </a>
+    <!-- Category Products Section (Hidden by default) -->
+    <section id="categoryProducts" class="py-16 bg-white" style="display: none;">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-2" id="categoryTitle">Category Products</h2>
+                    <p class="text-xl text-gray-600" id="categorySubtitle">Hand-picked products for you</p>
+                </div>
+                <button onclick="closeCategory()" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition-all">
+                    ← Back to Categories
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="categoryProductsGrid">
+                <!-- Filtered products will appear here -->
             </div>
         </div>
     </section>
@@ -789,7 +770,7 @@ You can also use markdown:
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         // Firebase configuration
         const firebaseConfig = {
@@ -1143,6 +1124,7 @@ You can also use markdown:
                 
                 loadFeaturedProducts();
                 loadArticles();
+                loadCategories();
             } else {
                 // Show login button, hide admin menu
                 const adminMenu = document.getElementById('adminMenu');
@@ -1152,6 +1134,7 @@ You can also use markdown:
                 
                 loadFeaturedProducts();
                 loadArticles();
+                loadCategories();
             }
         });
 
@@ -1375,6 +1358,7 @@ You can also use markdown:
             try {
                 await deleteDoc(doc(db, 'featuredProducts', id));
                 loadFeaturedProducts();
+                loadCategories();
                 loadManageContent();
                 alert('Product deleted successfully!');
             } catch (error) {
@@ -1384,6 +1368,178 @@ You can also use markdown:
         };
 
         // Form handlers
+
+        // Load categories dynamically
+        async function loadCategories() {
+            const grid = document.getElementById('categoryGrid');
+            
+            const categoryConfig = {
+                'GPS & Tech': {
+                    image: 'https://images.unsplash.com/photo-1508056357687-c58c90bb3cce?w=600&q=80&fit=crop',
+                    color: 'orange',
+                    description: 'Smart devices for smarter course management'
+                },
+                'Training Aids': {
+                    image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80&fit=crop',
+                    color: 'purple',
+                    description: 'Tools that actually improve your swing'
+                },
+                'Clubs & Equipment': {
+                    image: 'https://images.unsplash.com/photo-1593111774240-d529f12a7a19?w=600&q=80&fit=crop',
+                    color: 'green',
+                    description: 'Game-improvement sets that look tour-ready'
+                },
+                'Golf Apparel': {
+                    image: 'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&q=80&fit=crop',
+                    color: 'blue',
+                    description: 'Performance wear that doesn\'t break the bank'
+                },
+                'Golf Balls': {
+                    image: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=600&q=80&fit=crop',
+                    color: 'yellow',
+                    description: 'Premium balls for every skill level'
+                },
+                'Accessories': {
+                    image: 'https://images.unsplash.com/photo-1530028828-25e8270e10e6?w=600&q=80&fit=crop',
+                    color: 'gray',
+                    description: 'Essential gear for every round'
+                }
+            };
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, 'featuredProducts'));
+                const categoryCounts = {};
+                
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    if (product.category) {
+                        categoryCounts[product.category] = (categoryCounts[product.category] || 0) + 1;
+                    }
+                });
+                
+                if (Object.keys(categoryCounts).length === 0) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500"><p class="text-lg">No categories yet. Add products to get started!</p></div>';
+                    return;
+                }
+                
+                grid.innerHTML = '';
+                Object.keys(categoryConfig).forEach((category) => {
+                    const count = categoryCounts[category] || 0;
+                    if (count === 0) return; // Skip categories with no products
+                    
+                    const config = categoryConfig[category];
+                    grid.innerHTML += `
+                        <div onclick="showCategoryProducts('${category}')" class="cursor-pointer group">
+                            <div class="relative overflow-hidden rounded-xl card-hover border-2 border-gray-200 bg-white h-64">
+                                <img src="${config.image}" 
+                                     alt="${category}" 
+                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <h3 class="text-2xl font-bold mb-2">${category}</h3>
+                                    <p class="text-sm text-gray-200 mb-3">${config.description}</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-${config.color}-400 font-semibold group-hover:underline">View ${count} Products →</span>
+                                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">${count}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-red-600">Error loading categories. Please refresh.</div>';
+            }
+        }
+        
+        // Show products by category
+        window.showCategoryProducts = async function(category) {
+            const categorySection = document.getElementById('categoryProducts');
+            const productGrid = document.getElementById('categoryProductsGrid');
+            const title = document.getElementById('categoryTitle');
+            const subtitle = document.getElementById('categorySubtitle');
+            
+            title.textContent = category;
+            subtitle.textContent = 'Hand-picked products for you';
+            
+            productGrid.innerHTML = '<div class="col-span-full text-center py-12"><div class="animate-spin w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full mx-auto"></div><p class="mt-4 text-gray-600">Loading products...</p></div>';
+            
+            categorySection.style.display = 'block';
+            categorySection.scrollIntoView({ behavior: 'smooth' });
+            
+            try {
+                const q = query(
+                    collection(db, 'featuredProducts'),
+                    where('category', '==', category),
+                    orderBy('createdAt', 'desc')
+                );
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    productGrid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500"><p class="text-lg">No products in this category yet.</p></div>';
+                    return;
+                }
+                
+                productGrid.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+                    const stars = '⭐'.repeat(Math.floor(product.rating));
+                    
+                    productGrid.innerHTML += `
+                        <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden card-hover relative">
+                            <div class="product-badge">${product.badge}</div>
+                            <div class="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                                ${product.imageUrl ? `
+                                    <img src="${product.imageUrl}" 
+                                         alt="${product.name}" 
+                                         class="w-full h-full object-contain p-4"
+                                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'text-center p-6\\'><div class=\\'text-6xl mb-4\\'>${product.icon || '📦'}</div>${product.iconLabel ? `<p class=\\'text-sm text-gray-500\\'>${product.iconLabel}</p>` : ''}</div>';">
+                                ` : `
+                                    <div class="text-center p-6">
+                                        <div class="text-6xl mb-4">${product.icon || '📦'}</div>
+                                        ${product.iconLabel ? `<p class="text-sm text-gray-500">${product.iconLabel}</p>` : ''}
+                                    </div>
+                                `}
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-yellow-500">${stars}</span>
+                                    <span class="text-sm text-gray-600">(${product.reviews.toLocaleString()} reviews)</span>
+                                </div>
+                                <p class="text-gray-700 mb-4 text-sm leading-relaxed">${product.description}</p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-2xl font-bold text-green-700">$${product.price}</span>
+                                        ${product.originalPrice ? `<span class="text-sm text-gray-500 line-through ml-2">$${product.originalPrice}</span>` : ''}
+                                    </div>
+                                    ${discount > 0 ? `<span class="text-sm font-semibold text-green-700">Save ${discount}%</span>` : ''}
+                                </div>
+                                <a href="${product.amazonLink}" target="_blank" rel="nofollow noopener" class="amazon-button w-full py-3 px-6 rounded-lg text-center font-bold block">
+                                    🛒 Check Price on Amazon
+                                </a>
+                                <p class="text-xs text-gray-500 mt-2 text-center">
+                                    As an Amazon Associate, we earn from qualifying purchases
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error loading category products:', error);
+                productGrid.innerHTML = '<div class="col-span-full text-center py-12 text-red-600">Error loading products. Please refresh.</div>';
+            }
+        };
+        
+        // Close category view
+        window.closeCategory = function() {
+            const categorySection = document.getElementById('categoryProducts');
+            categorySection.style.display = 'none';
+            document.getElementById('gear').scrollIntoView({ behavior: 'smooth' });
+        };
+
         document.getElementById('articleForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1416,6 +1572,7 @@ You can also use markdown:
             
             const productData = {
                 name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
                 badge: document.getElementById('productBadge').value,
                 imageUrl: document.getElementById('productImageUrl').value || null,
                 icon: document.getElementById('productIcon').value,
@@ -1435,6 +1592,7 @@ You can also use markdown:
                 closeModal('addProduct');
                 document.getElementById('productForm').reset();
                 loadFeaturedProducts();
+                loadCategories(); // Refresh categories
             } catch (error) {
                 console.error('Error adding product:', error);
                 alert('Error adding product: ' + error.message);
